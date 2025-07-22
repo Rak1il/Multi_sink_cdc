@@ -73,7 +73,10 @@ VALUES
 CREATE PUBLICATION engagement_pub FOR TABLE engagement_events;
 
 SELECT * FROM pg_create_logical_replication_slot('cdc_slot', 'pgoutput');
+
+
 🔷 3. Start Kafka & Zookeeper
+
 
 sudo /opt/kafka/bin/zookeeper-server-start.sh -daemon /opt/kafka/config/zookeeper.properties
 sudo /opt/kafka/bin/kafka-server-start.sh -daemon /opt/kafka/config/server.properties
@@ -81,7 +84,11 @@ Create Kafka topic:
 
 
 sudo /opt/kafka/bin/kafka-topics.sh --create --topic engagement_project.public.engagement_events --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+
 🔷 4. Start Kafka Connect
+
+
 bash
 Copy
 Edit
@@ -114,7 +121,11 @@ Check status:
 
 
 curl http://localhost:8083/connectors/engagement-cdc/status
+
+
 🔷 5. Cassandra
+
+
 Start Cassandra (docker or local):
 
 
@@ -135,12 +146,20 @@ CREATE TABLE engagement.engagement_events (
     duration_ms int,
     device text
 );
+
+
 🔷 6. Redis
+
+
 
 sudo apt update
 sudo apt install redis-server -y
 redis-cli ping
+
+
 🔷 7. REST API receiver
+
+
 Install Flask:
 
 
@@ -161,7 +180,11 @@ Run:
 
 
 python3 rest_api.py
+
+
 🔷 8. Spark job
+
+
 Install Python dependencies
 
 pip install redis cassandra-driver requests
@@ -280,6 +303,7 @@ curl -X POST http://localhost:5000/api -H "Content-Type: application/json" -d '{
 
 
 🔧 Future Improvements
+
 If additional time was available, the following improvements were planned:
 
 ⏱ Monitoring: Integrate Grafana + Prometheus for observability and lag tracking.
