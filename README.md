@@ -276,3 +276,16 @@ redis-cli ZREVRANGE engagement_10m 0 5 WITHSCORES
 
 
 curl -X POST http://localhost:5000/api -H "Content-Type: application/json" -d '{"message": "hello"}'
+
+
+
+🔧 Future Improvements
+If additional time was available, the following improvements were planned:
+
+⏱ Monitoring: Integrate Grafana + Prometheus for observability and lag tracking.
+
+📈 DLQ Support: Add dead-letter queue for error-prone Kafka messages.
+
+🧪 Testing: Add unit and integration tests for stream logic and API.
+
+☁️ Cloud Deployment: Create Docker Compose or Helm charts for deployment.
